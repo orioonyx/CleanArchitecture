@@ -1,6 +1,7 @@
 package com.kyungeun.cleanarchitecture.di.module
 
-import com.kyungeun.cleanarchitecture.data.networking.CoroutineDispatcherProvider
+import com.kyungeun.cleanarchitecture.data.source.remote.CoroutineDispatcherProvider
+import com.kyungeun.cleanarchitecture.util.Constants.BASE_URL
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -15,8 +16,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
 
-    const val BASE_PRAY_URL = "https://muslimsalat.com"
-
     @Provides
     fun provideOkHttpClient(): OkHttpClient {
         val logging = HttpLoggingInterceptor()
@@ -30,7 +29,7 @@ object NetworkModule {
     @Provides
     fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
-            .baseUrl(BASE_PRAY_URL)
+            .baseUrl(BASE_URL)
             .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())

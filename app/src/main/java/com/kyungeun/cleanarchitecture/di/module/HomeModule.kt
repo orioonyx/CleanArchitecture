@@ -1,6 +1,6 @@
 package com.kyungeun.cleanarchitecture.di.module
 
-import com.kyungeun.cleanarchitecture.presentation.home.adapter.PrayAdapter
+import com.kyungeun.cleanarchitecture.presentation.home.adapter.ReposAdapter
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -11,7 +11,7 @@ import dagger.hilt.android.components.FragmentComponent
 object HomeModule {
 
     @Provides
-    fun providePrayAdapter(): PrayAdapter {
-        return PrayAdapter()
+    fun providePrayAdapter(): ReposAdapter {
+        return ReposAdapter()
     }
 }

@@ -1,32 +1,31 @@
 package com.kyungeun.cleanarchitecture.di.module
 
-import android.content.Context
+import android.app.Application
 import androidx.room.Room
-import com.kyungeun.cleanarchitecture.data.database.pray.MyRoomDatabase
-import com.kyungeun.cleanarchitecture.data.database.pray.dao.PrayDao
+import com.kyungeun.cleanarchitecture.data.source.local.AppDatabase
+import com.kyungeun.cleanarchitecture.data.source.local.dao.GitReposDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import javax.inject.Singleton
 
-@Module
 @InstallIn(SingletonComponent::class)
+@Module
 object DatabaseModule {
 
-    private const val DB_NAME = "fahrizal_db"
-
     @Provides
-    fun provideMyRoomDatabase(@ApplicationContext context: Context): MyRoomDatabase {
+    @Singleton
+    internal fun provideAppDatabase(application: Application): AppDatabase {
         return Room.databaseBuilder(
-            context,
-            MyRoomDatabase::class.java,
-            DB_NAME
-        ).build()
+            application,
+            AppDatabase::class.java,
+            AppDatabase.DB_NAME
+        ).allowMainThreadQueries().build()
     }
 
     @Provides
-    fun providePrayDao(myRoomDatabase: MyRoomDatabase): PrayDao {
-        return myRoomDatabase.prayDao()
+    internal fun provideGitReposDao(appDatabase: AppDatabase): GitReposDao {
+        return appDatabase.gitReposDao
     }
 }

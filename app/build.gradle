@@ -20,8 +20,7 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
-        buildConfigField "String", "API_KEY", properties['api_key']
-        buildConfigField "String", "BASE_PRAY_URL", properties['base_pray_url']
+        buildConfigField "String", "GIT_URL", properties['github_url']
     }
     buildTypes {
         release {

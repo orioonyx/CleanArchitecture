@@ -1,6 +1,6 @@
 package com.kyungeun.cleanarchitecture.di.module
 
-import com.kyungeun.cleanarchitecture.data.schedule.api.PrayApi
+import com.kyungeun.cleanarchitecture.data.source.remote.api.RetrofitService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -12,6 +12,6 @@ import retrofit2.Retrofit
 object ApiModule {
 
     @Provides
-    fun providePrayApi(retrofit: Retrofit): PrayApi = retrofit.create(PrayApi::class.java)
+    fun provideRetrofit(retrofit: Retrofit): RetrofitService = retrofit.create(RetrofitService::class.java)
 
 }

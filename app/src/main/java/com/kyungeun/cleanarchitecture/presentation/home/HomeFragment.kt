@@ -4,13 +4,14 @@ import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewbinding.ViewBinding
 import com.kyungeun.cleanarchitecture.databinding.FragmentHomeBinding
 import com.kyungeun.cleanarchitecture.presentation.base.BaseFragment
-import com.kyungeun.cleanarchitecture.presentation.home.adapter.PrayAdapter
+import com.kyungeun.cleanarchitecture.presentation.home.adapter.ReposAdapter
+import com.kyungeun.cleanarchitecture.util.Constants.GIT_ID
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -20,34 +21,34 @@ import javax.inject.Inject
 class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
     @Inject
-    lateinit var prayAdapter: PrayAdapter
+    lateinit var reposAdapter: ReposAdapter
 
     private val homeViewModel: HomeViewModel by viewModels()
 
     override fun constructViewBinding(): ViewBinding = FragmentHomeBinding.inflate(layoutInflater)
 
     override fun init(viewBinding: ViewBinding) {
-        homeViewModel.getPraySchedule()
+        homeViewModel.getRepos()
         initUi()
-        fetchPraySchedules()
+        fetchRepos()
     }
 
     private fun initUi() {
-        getViewBinding().prayScheduleRv.run {
+        getViewBinding().reposRV.run {
             layoutManager = LinearLayoutManager(context)
             setHasFixedSize(true)
-            adapter = prayAdapter
+            adapter = reposAdapter
         }
     }
 
-    private fun fetchPraySchedules() {
+    private fun fetchRepos() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 homeViewModel.uiState.collect { state ->
                     when (state) {
-                        is HomeViewModel.PrayUiState.Loaded -> onLoaded(state.itemState)
-                        is HomeViewModel.PrayUiState.Error -> showError(state.message)
-                        is HomeViewModel.PrayUiState.Loading -> showLoading()
+                        is HomeViewModel.ReposUiState.Loaded -> onLoaded(state.itemState)
+                        is HomeViewModel.ReposUiState.Error -> showError(state.message)
+                        is HomeViewModel.ReposUiState.Loading -> showLoading()
                     }
                 }
             }
@@ -56,8 +57,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
     private fun onLoaded(homeItemUiState: HomeItemUiState) {
         homeItemUiState.run {
-            getViewBinding().cityTv.text = city
-            prayAdapter.update(schedules)
+            getViewBinding().userNameTv.text = "Github Id : $GIT_ID"
+            reposAdapter.update(homeItemUiState.gitRepos)
         }
     }
 
