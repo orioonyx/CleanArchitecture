@@ -1,4 +1,4 @@
-package com.kyungeun.cleanarchitecture.data.source.remote
+package com.kyungeun.cleanarchitecture.util
 
 import kotlinx.coroutines.Dispatchers
 

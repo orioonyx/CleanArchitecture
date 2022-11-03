@@ -1,6 +1,6 @@
 package com.kyungeun.cleanarchitecture.di.module
 
-import com.kyungeun.cleanarchitecture.data.source.remote.CoroutineDispatcherProvider
+import com.kyungeun.cleanarchitecture.util.CoroutineDispatcherProvider
 import com.kyungeun.cleanarchitecture.util.Constants.BASE_URL
 import dagger.Module
 import dagger.Provides

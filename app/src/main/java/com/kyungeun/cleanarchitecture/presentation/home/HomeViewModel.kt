@@ -3,7 +3,7 @@ package com.kyungeun.cleanarchitecture.presentation.home
 import androidx.annotation.StringRes
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.kyungeun.cleanarchitecture.data.source.remote.CoroutineDispatcherProvider
+import com.kyungeun.cleanarchitecture.util.CoroutineDispatcherProvider
 import com.kyungeun.cleanarchitecture.domain.model.GitReposRequest
 import com.kyungeun.cleanarchitecture.domain.usecase.GetGitReposUseCase
 import com.kyungeun.cleanarchitecture.util.Constants.GIT_ID
