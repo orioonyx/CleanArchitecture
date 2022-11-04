@@ -3,7 +3,7 @@
 A sample android app that shows how to use ViewModels and Room together with RxJava & Hilt in Kotlin by Clean Architecture.
 <br><br>
 The demo data used GitHub api.
-<br>
+
 ### Libraries used on the sample project
 * ViewModel
 * LiveData
@@ -12,7 +12,7 @@ The demo data used GitHub api.
 * Room
 * Retrofit
 * Navigation
-<br>
+
 ### Implemented by Clean Architecture
 The following diagram shows the structure of this project with 3 layers:
 - Presentation
